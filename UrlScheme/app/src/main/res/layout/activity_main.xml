@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="android.test.testapplication.MainActivity">
+
+    <TextView
+        android:id="@+id/note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="「NOTE」This is a test with what will happen when launch a 'standard' activity with FLAG_CLEAR_TOP" />
+
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/note"
+        android:text="「MainActivity」is first activity of this application" />
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/desc"
+        android:text="android:launchMode='singleTop'" />
+
+    <TextView
+        android:id="@+id/timestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text"
+        android:text="" />
+
+    <Button
+        android:id="@+id/launchA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/timestamp"
+        android:text="launch-A" />
+
+    <TextView
+        android:id="@+id/desc_launchA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/launchA"
+        android:layout_toRightOf="@+id/launchA"
+        android:text="click to launch A" />
+
+    <Button
+        android:id="@+id/launchB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/launchA"
+        android:enabled="false"
+        android:text="launch-B" />
+
+    <Button
+        android:id="@+id/launchC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/launchB"
+        android:enabled="false"
+        android:text="launch-C" />
+
+    <Button
+        android:id="@+id/launchD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/launchC"
+        android:enabled="false"
+        android:text="launch-D" />
+</RelativeLayout>
