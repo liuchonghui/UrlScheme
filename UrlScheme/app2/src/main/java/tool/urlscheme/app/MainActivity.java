@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,7 +88,6 @@ public class MainActivity extends Activity {
                                 intent.setAction(Intent.ACTION_VIEW);
                                 intent.setPackage(pluginPackageName);
                                 Uri uri = Uri.parse("usfg://urlscheme/start?android.intent.extra.TEXT=T01022184");
-                                Log.d("PPP", "uri.getPath|" + uri.getPath());
                                 intent.setData(uri);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -109,7 +107,7 @@ public class MainActivity extends Activity {
                                 Intent intent = new Intent();
                                 intent.setAction(Intent.ACTION_VIEW);
                                 intent.setPackage(pluginPackageName);
-                                intent.setData(Uri.parse("usfg://urlscheme/setting?android.intent.extra.TEXT=T01022184"));
+                                intent.setData(Uri.parse("usfg://urlscheme/setting?android.intent.extra.TEXT=T01022185"));
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 if (CheckUtil.checkBeforeStartIntent(v.getContext(), intent, pluginPackageName, pluginPackageName + ".SettingActivity")) {
@@ -128,7 +126,7 @@ public class MainActivity extends Activity {
                                 Intent intent = new Intent();
                                 intent.setAction(Intent.ACTION_VIEW);
                                 intent.setPackage(pluginPackageName);
-                                intent.setData(Uri.parse("usfg://urlscheme/api?android.intent.extra.TEXT=T01022184"));
+                                intent.setData(Uri.parse("usfg://urlscheme/api?android.intent.extra.TEXT=T01022186"));
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 if (CheckUtil.checkBeforeStartIntent(v.getContext(), intent, pluginPackageName, pluginPackageName + ".APIActivity")) {
