@@ -2,7 +2,11 @@ package tool.urlscheme.app;
 
 import android.app.Activity;
 import android.compact.utils.FileCompactUtil;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +17,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.kuaiest.video.cpplugin.PluginUtil;
 import com.limpoxe.fairy.content.PluginDescriptor;
+import com.limpoxe.fairy.core.FairyGlobal;
+import com.limpoxe.fairy.core.PluginIntentResolver;
 import com.limpoxe.fairy.manager.PluginManagerHelper;
+import com.limpoxe.fairy.util.CheckUtil;
 
 import java.io.File;
+
+import tools.android.apfmanager.CpPluginTransition;
+import tools.android.apfmanager.PluginUtil;
 
 public class MainActivity extends Activity {
 
@@ -30,10 +39,17 @@ public class MainActivity extends Activity {
     }
 
     protected void initData() {
-        PluginUtil.Companion.checkAndInstallPlugins(getApplicationContext(), false);
+        CpPluginTransition.Companion.get().setFetchUrl("http://45.32.40.65/g/urlscheme");
     }
 
     protected void initView() {
+        final Button request = (Button) findViewById(R.id.btn_request);
+        request.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PluginUtil.Companion.checkAndInstallPlugins(getApplicationContext(), false);
+            }
+        });
         final CheckBox cp_plugin_switcher = (CheckBox) findViewById(R.id.cp_plugin_switcher);
         final ViewGroup cp_plugin_panel = (ViewGroup) findViewById(R.id.cp_plugin_panel);
         cp_plugin_switcher.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -41,7 +57,7 @@ public class MainActivity extends Activity {
             public void onCheckedChanged(CompoundButton buttonView, boolean checked) {
                 if (checked) {
                     for (PluginDescriptor pd : PluginManagerHelper.getPlugins()) {
-                        String pluginPackageName = pd.getPackageName();
+                        final String pluginPackageName = pd.getPackageName();
                         boolean pluginEnable = pd.isEnabled();
                         boolean pluginStandAlone = pd.isStandalone();
                         String pluginVersion = pd.getVersion();
@@ -63,14 +79,64 @@ public class MainActivity extends Activity {
                             }
                         });
 
-                        final Button btn = new Button(cp_plugin_switcher.getContext());
-                        btn.setText("测试");
-                        btn.setTag(pluginVersion.substring(0, pluginVersion.indexOf("_")));
-                        btn.setOnClickListener(new View.OnClickListener() {
+                        final Button btn1 = new Button(cp_plugin_switcher.getContext());
+                        btn1.setText("StartActivity");
+                        btn1.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                String tag = (String) v.getTag();
-                                TestSuit.Companion.get().testAndToast(v.getContext(), tag);
+                                IntentFilter iff;
+                                Intent intent = new Intent();
+                                intent.setAction(Intent.ACTION_VIEW);
+                                intent.setPackage(pluginPackageName);
+                                Uri uri = Uri.parse("usfg://urlscheme/start?android.intent.extra.TEXT=T01022184");
+                                Log.d("PPP", "uri.getPath|" + uri.getPath());
+                                intent.setData(uri);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                if (CheckUtil.checkBeforeStartIntent(v.getContext(), intent, pluginPackageName, pluginPackageName + ".StartActivity")) {
+                                    if (FairyGlobal.hasPluginFilter() && FairyGlobal.filterPlugin(intent)) {
+                                        PluginIntentResolver.resolveActivity(intent);
+                                    }
+                                    startActivity(intent);
+                                }
+                            }
+                        });
+                        final Button btn2 = new Button(cp_plugin_switcher.getContext());
+                        btn2.setText("SettingActivity");
+                        btn2.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent();
+                                intent.setAction(Intent.ACTION_VIEW);
+                                intent.setPackage(pluginPackageName);
+                                intent.setData(Uri.parse("usfg://urlscheme/setting?android.intent.extra.TEXT=T01022184"));
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                if (CheckUtil.checkBeforeStartIntent(v.getContext(), intent, pluginPackageName, pluginPackageName + ".SettingActivity")) {
+                                    if (FairyGlobal.hasPluginFilter() && FairyGlobal.filterPlugin(intent)) {
+                                        PluginIntentResolver.resolveActivity(intent);
+                                    }
+                                    startActivity(intent);
+                                }
+                            }
+                        });
+                        final Button btn3 = new Button(cp_plugin_switcher.getContext());
+                        btn3.setText("APIActivity");
+                        btn3.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent();
+                                intent.setAction(Intent.ACTION_VIEW);
+                                intent.setPackage(pluginPackageName);
+                                intent.setData(Uri.parse("usfg://urlscheme/api?android.intent.extra.TEXT=T01022184"));
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                if (CheckUtil.checkBeforeStartIntent(v.getContext(), intent, pluginPackageName, pluginPackageName + ".APIActivity")) {
+                                    if (FairyGlobal.hasPluginFilter() && FairyGlobal.filterPlugin(intent)) {
+                                        PluginIntentResolver.resolveActivity(intent);
+                                    }
+                                    startActivity(intent);
+                                }
                             }
                         });
 
@@ -79,8 +145,14 @@ public class MainActivity extends Activity {
                         cont.setGravity(Gravity.CENTER_VERTICAL);
                         LinearLayout.LayoutParams textPl = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f);
                         cont.addView(text, textPl);
-                        LinearLayout.LayoutParams btnPl = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 0.33f);
-                        cont.addView(btn, btnPl);
+                        LinearLayout buttonsLayout = new LinearLayout(cp_plugin_switcher.getContext());
+                        buttonsLayout.setOrientation(LinearLayout.VERTICAL);
+                        buttonsLayout.setGravity(Gravity.CENTER_HORIZONTAL);
+                        buttonsLayout.addView(btn1);
+                        buttonsLayout.addView(btn2);
+                        buttonsLayout.addView(btn3);
+                        LinearLayout.LayoutParams btnPl = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 0.6f);
+                        cont.addView(buttonsLayout, btnPl);
                         cp_plugin_panel.addView(cont);
                     }
                     cp_plugin_panel.invalidate();
