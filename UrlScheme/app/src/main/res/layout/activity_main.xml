@@ -1,77 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="android.test.testapplication.MainActivity">
+    android:scrollbars="none">
 
-    <TextView
-        android:id="@+id/note"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="「NOTE」This is a test with what will happen when launch a 'standard' activity with FLAG_CLEAR_TOP" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context="android.test.urlscheme.MainActivity">
 
-    <TextView
-        android:id="@+id/desc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/note"
-        android:text="「MainActivity」is first activity of this application" />
+        <TextView
+            android:id="@+id/note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="「NOTE」This is a test with different scheme launch different activities" />
 
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/desc"
-        android:text="android:launchMode='singleTop'" />
+        <LinearLayout
+            android:id="@+id/card1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/note"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/timestamp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/text"
-        android:text="" />
+            <View
+                android:id="@+id/splash1"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#363636" />
 
-    <Button
-        android:id="@+id/launchA"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/timestamp"
-        android:text="launch-A" />
+            <TextView
+                android:id="@+id/title1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/splash1"
+                android:background="#77ff99"
+                android:text="Run on console and launch 「StartActivity」:" />
 
-    <TextView
-        android:id="@+id/desc_launchA"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/launchA"
-        android:layout_toRightOf="@+id/launchA"
-        android:text="click to launch A" />
+            <LinearLayout
+                android:id="@+id/launch1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title1"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/launchB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/launchA"
-        android:enabled="false"
-        android:text="launch-B" />
+                <TextView
+                    android:id="@+id/hint1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#607799ff"
+                    android:text="adb shell am start -a android.intent.action.VIEW -d usfg://urlscheme/start -e android.intent.extra.TEXT T01022184"
+                    android:textColor="#ff4500" />
 
-    <Button
-        android:id="@+id/launchC"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/launchB"
-        android:enabled="false"
-        android:text="launch-C" />
+                <Button
+                    android:id="@+id/btn1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.33"
+                    android:text="copy" />
+            </LinearLayout>
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/launchD"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/launchC"
-        android:enabled="false"
-        android:text="launch-D" />
-</RelativeLayout>
+        <LinearLayout
+            android:id="@+id/card2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/card1"
+            android:orientation="vertical">
+
+            <View
+                android:id="@+id/splash2"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#363636" />
+
+            <TextView
+                android:id="@+id/title2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/splash2"
+                android:background="#77ff99"
+                android:text="Run on console and launch 「SettingActivity」:" />
+
+            <LinearLayout
+                android:id="@+id/launch2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title2"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/hint2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#607799ff"
+                    android:text="adb shell am start -a android.intent.action.VIEW -d usfg://urlscheme/setting -e android.intent.extra.TEXT T01022185"
+                    android:textColor="#ff4500" />
+
+                <Button
+                    android:id="@+id/btn2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.33"
+                    android:text="copy" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/card3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/card2"
+            android:orientation="vertical">
+
+            <View
+                android:id="@+id/splash3"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#363636" />
+
+            <TextView
+                android:id="@+id/title3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/splash3"
+                android:background="#77ff99"
+                android:text="Run on console and launch 「APIActivity」:" />
+
+            <LinearLayout
+                android:id="@+id/launch3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title3"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/hint3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#607799ff"
+                    android:text="adb shell am start -a android.intent.action.VIEW -d usfg://urlscheme/api -e android.intent.extra.TEXT T01022186"
+                    android:textColor="#ff4500" />
+
+                <Button
+                    android:id="@+id/btn3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.33"
+                    android:text="copy" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>
